@@ -44,6 +44,21 @@
         <tag>HEAD</tag>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>circle-ci</id>
+            <url>file:///tmp/artifacts</url>
+        </repository>
+        <snapshotRepository>
+            <id>circle-ci-snapshot</id>
+            <url>file:///tmp/artifacts</url>
+        </snapshotRepository>
+        <site>
+            <id>circle-ci-site</id>
+            <url>file:///tmp/artifacts</url>
+        </site>
+    </distributionManagement>
+
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -115,4 +130,26 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ci</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
