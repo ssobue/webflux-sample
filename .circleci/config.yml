@@ -22,10 +22,14 @@ jobs:
             - v1-dependencies-
 
       # run tests!
-      - run: ./mvnw verify -P ci
+      - run: ./mvnw verify site -P ci
 
       - store_test_results:
           path: ./target/surefire-reports
+
+      - store_artifacts:
+          path: ./target/site/clover
+          destination: artifacts
 
       - save_cache:
           paths:
