@@ -1,6 +1,6 @@
-package dev.sobue.webflux;
+package dev.sobue.webflux.controller;
 
-import java.util.Collections;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +20,8 @@ public class SampleController {
    * @return view name
    */
   @GetMapping
-  public String index(Model model) {
-    model.addAllAttributes(Collections.singletonMap("title", "Spring WebFlux Demo Page"));
+  public String index(@NotNull Model model) {
+    model.addAttribute("title", "Spring WebFlux Demo Page");
     return "index";
   }
 }
